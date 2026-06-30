@@ -1,0 +1,299 @@
+/* Core Reset Properties */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: radial-gradient(circle at 50% 50%, #2c1654 0%, #110724 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Fredoka One', cursive;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Floating Backdrop Accents */
+.star { position: absolute; opacity: 0.5; font-size: 1.5rem; animation: pulse 2s infinite alternate; pointer-events: none; }
+.s1 { top: 15%; left: 10%; animation-delay: 0s; }
+.s2 { top: 25%; right: 12%; animation-delay: 0.5s; }
+.s3 { bottom: 20%; left: 15%; font-size: 2rem; animation-delay: 1s; }
+.s4 { bottom: 35%; right: 8%; animation-delay: 1.5s; }
+
+@keyframes pulse {
+    0% { transform: scale(0.8); opacity: 0.3; }
+    100% { transform: scale(1.2); opacity: 0.8; }
+}
+
+.envelope-container {
+    width: 100%;
+    max-width: 420px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+
+.hint-text {
+    color: #ffb3ba;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    text-align: center;
+    text-shadow: 0 2px 10px rgba(255,179,186,0.5);
+    transition: opacity 0.5s ease;
+}
+
+/* --- MAIN ENVELOPE BOX --- */
+.envelope-wrapper {
+    position: relative;
+    width: 310px;
+    height: 210px;
+    background: #ff6b81; 
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    cursor: pointer;
+    perspective: 1200px;
+}
+
+/* Overlapping Paper Pockets */
+.envelope-front {
+    position: absolute;
+    width: 0; height: 0;
+    border-left: 155px solid #ff4757;
+    border-right: 155px solid #ff4757;
+    border-top: 105px solid transparent;
+    border-bottom: 105px solid #ff4757;
+    border-radius: 0 0 16px 16px;
+    top: 0; left: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Top Triangular Flap */
+.envelope-flap {
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 0;
+    border-left: 155px solid transparent;
+    border-right: 155px solid transparent;
+    border-top: 110px solid #ee3545; 
+    transform-origin: top center;
+    z-index: 4;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+/* Wax Seal Stamp */
+.wax-seal {
+    position: absolute;
+    width: 55px; height: 55px;
+    background: #ffbc42;
+    border-radius: 50%;
+    top: 85px; left: 127px;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3), inset 0 0 6px rgba(0,0,0,0.2);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* --- THE STATIONERY SHEET --- */
+/* --- THE STATIONERY SHEET (REPAIRED) --- */
+.letter {
+    position: absolute;
+    bottom: 5px;
+    left: 15px;
+    width: 280px;
+    height: 190px;
+    
+    /* Grid Paper Pattern */
+    background-color: #fffdf3;
+    background-image: 
+        linear-gradient(rgba(255, 182, 193, 0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 182, 193, 0.3) 1px, transparent 1px);
+    background-size: 20px 20px;
+    
+    border-radius: 12px;
+    padding: 20px 10px 20px 25px; /* Tweak right side padding for scrollbar room */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+    z-index: 2;
+    transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1), height 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    
+    /* ALLOW INTERNAL VERTICAL SCROLLING FOR OVERFLOW TEXT */
+    overflow-y: auto; 
+    overflow-x: hidden;
+    
+    border-left: 8px solid #ffccd5;
+    
+    /* Smooth scrolling behavior on mobile phones */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Optional: Make the scrollbar look sleek and subtle */
+.letter::-webkit-scrollbar {
+    width: 4px;
+}
+.letter::-webkit-scrollbar-thumb {
+    background: rgba(255, 71, 87, 0.3);
+    border-radius: 4px;
+}
+
+/* Binder hole simulation */
+.letter::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 6px; width: 6px; height: 100%;
+    background-image: radial-gradient(circle, #3a1c40 3px, transparent 4px);
+    background-size: 10px 25px;
+    opacity: 0.15;
+}
+
+/* Content Container */
+.letter-text {
+    opacity: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: opacity 0.4s ease;
+}
+
+.letter-text h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    color: #ff4757;
+    text-align: left;
+    margin-bottom: 2px;
+}
+
+.letter-text .date {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.75rem;
+    color: #9b7fa3;
+    text-align: left;
+    margin-bottom: 8px;
+    font-style: italic;
+}
+
+.letter-text hr {
+    border: none;
+    height: 4px;
+    background: repeating-linear-gradient(-45deg, #ffb3ba, #ffb3ba 4px, #fff 4px, #fff 8px);
+    border-radius: 2px;
+    margin-bottom: 12px;
+}
+
+.letter-text p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    color: #4a3352;
+}
+
+.letter-text strong {
+    background: #ffdfe4;
+    color: #d63031;
+    padding: 1px 4px;
+    border-radius: 4px;
+}
+
+.letter-text .signature {
+    font-family: 'Sacramento', cursive;
+    font-size: 2.2rem;
+    color: #ff4757;
+    text-align: right;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* Polaroid Picture Decorative Element */
+.letter-text::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    right: 12px;
+    width: 60px;
+    height: 75px;
+    background-color: #ffffff;
+    background-image: url('WhatsApp Image 2026-06-29 at 6.18.29 PM.jpeg');
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    background-position: top 5px center;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transform: rotate(8deg);
+    border: 1px solid #eee;
+    z-index: 12;
+    opacity: 0;
+    transition: opacity 0.5s ease 0.6s;
+}
+
+/* --- BUTTON LAYOUT SHIFT --- */
+.button-container {
+    text-align: center;
+    margin-top: auto; 
+    padding-top: 10px;
+    width: 100%;
+}
+
+.fun-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* --- OPEN ENVELOPE STATES --- */
+.envelope-wrapper.open .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 1; 
+}
+
+.envelope-wrapper.open .wax-seal {
+    opacity: 0;
+    transform: scale(0.5);
+    pointer-events: none;
+}
+
+.envelope-wrapper.open .letter {
+    transform: translateY(-240px); 
+    height: 440px; /* Expands paper perfectly to hold the button container */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+    z-index: 10;
+}
+
+.envelope-wrapper.open .letter-text {
+    opacity: 1;
+    transition-delay: 0.4s;
+}
+
+.envelope-wrapper.open .letter-text::after {
+    opacity: 1;
+}
+
+.envelope-wrapper.open .fun-btn {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.5s ease 0.8s;
+}
+
+.fun-btn:active {
+    transform: scale(0.95);
+}

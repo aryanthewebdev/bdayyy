@@ -1,0 +1,193 @@
+/* Core Styling Setup */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(180deg, #ffb3ba 0%, #ffdfba 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Fredoka One', cursive;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Cute Floating Decorative Background Elements */
+.cloud { position: absolute; font-size: 3.5rem; opacity: 0.3; z-index: 1; }
+.c1 { top: 10%; left: -10px; animation: floatLeftRight 8s infinite alternate ease-in-out; }
+.c2 { bottom: 15%; right: -10px; animation: floatLeftRight 6s infinite alternate-reverse ease-in-out; }
+.sparkle { position: absolute; font-size: 2rem; opacity: 0.6; }
+.sp1 { top: 20%; right: 15%; }
+.sp2 { bottom: 25%; left: 12%; }
+
+@keyframes floatLeftRight {
+    0% { transform: translateX(0) translateY(0); }
+    100% { transform: translateX(30px) translateY(-10px); }
+}
+
+.gallery-container {
+    width: 100%;
+    max-width: 420px;
+    height: 94vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 15px;
+    z-index: 10;
+}
+
+/* --- THE 3D BOOK CONTAINER --- */
+.book {
+    width: 290px;
+    height: 410px;
+    position: relative;
+    perspective: 1500px; /* Essential for depth perspective of page flips */
+    margin: auto 0;
+}
+
+/* Page base properties */
+.page {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+    transform-origin: left center; /* Sets page pivot hinge on the left edge */
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+    z-index: 1;
+    display: none; /* Controlled by active status classes */
+    pointer-events: none;
+}
+
+.page.active {
+    display: block;
+    z-index: 5;
+    pointer-events: auto;
+}
+
+/* Page inner sheets sheets */
+.page-content {
+    width: 100%;
+    height: 100%;
+    background: #fffdf6;
+    border-radius: 4px 16px 16px 4px;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.15);
+    padding: 20px;
+    backface-visibility: hidden; /* Stops content from looking mirrored backwards */
+    border-left: 5px solid #ffccd5; /* Visual spine binding simulation */
+}
+
+/* Page turned over styling state */
+.page.flipped {
+    transform: rotateY(-180deg);
+    z-index: 2;
+}
+
+/* --- FRONT COVER STYLING --- */
+.cover-front .page-content {
+    background: linear-gradient(135deg, #ff6b81, #ff4757);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: none;
+    box-shadow: 8px 8px 25px rgba(255, 71, 87, 0.3);
+}
+
+.cover-design {
+    text-align: center;
+    border: 3px dashed rgba(255,255,255,0.5);
+    padding: 30px 15px;
+    border-radius: 12px;
+    width: 100%;
+}
+.cover-design h1 {
+    font-family: 'Sacramento', cursive;
+    font-size: 3.2rem;
+    margin-bottom: 5px;
+    text-shadow: 0 3px 0px rgba(0,0,0,0.1);
+}
+.heart-badge { font-size: 3.5rem; margin-bottom: 10px; animation: bounce 1s infinite alternate; }
+
+/* --- PHOTO PAGE LAYOUTS --- */
+.photo-frame {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.photo-frame img {
+    width: 100%;
+    height: 290px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 6px solid white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.caption {
+    font-family: 'Sacramento', cursive;
+    font-size: 1.8rem;
+    color: #4a374a;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* --- BACK COVER STYLING --- */
+.cover-back .page-content {
+    background: linear-gradient(135deg, #2f3542, #57606f);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* --- BOTTOM CONTROLLER BUTTONS --- */
+.controls-zone {
+    display: flex;
+    width: 100%;
+    max-width: 320px;
+    justify-content: space-between;
+    gap: 20px;
+}
+.nav-btn {
+    flex: 1;
+    background: white;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 50px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    color: #ff6b81;
+    box-shadow: 0 6px 0px #ffccd5, 0 10px 20px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+.nav-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0px #ffccd5, 0 5px 10px rgba(0,0,0,0.08);
+}
+.final-letter-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: #ff6b81;
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(255, 107, 129, 0.4);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.final-letter-btn:active {
+    transform: scale(0.95);
+    background: #ff4757;
+}

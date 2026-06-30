@@ -1,0 +1,208 @@
+/* Core Document Properties */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: radial-gradient(circle at 50% 30%, #4a2673 0%, #16082c 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Fredoka One', cursive;
+    overflow: hidden;
+    position: relative;
+}
+
+.wishes-container {
+    width: 100%;
+    max-width: 420px;
+    height: 94vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 15px;
+    z-index: 10;
+}
+
+/* --- DECORATIONS & STICKERS --- */
+.sticker {
+    position: absolute;
+    font-size: 2.5rem;
+    filter: drop-shadow(0 8px 10px rgba(0,0,0,0.3));
+    z-index: 2;
+}
+.panda-sticker { top: 15%; left: 5%; animation: dance 2s ease-in-out infinite alternate; }
+.cat-sticker { top: 38%; right: 5%; animation: dance 1.6s ease-in-out infinite alternate-reverse; }
+.gift-sticker { bottom: 22%; left: 6%; }
+.heart-sticker { font-size: 1.5rem; }
+.h1 { top: 12%; right: 10%; }
+.h2 { bottom: 38%; left: 40%; }
+
+@keyframes dance {
+    0% { transform: translateY(0) rotate(-10deg); }
+    100% { transform: translateY(-10px) rotate(10deg); }
+}
+
+.garland {
+    position: absolute;
+    top: 0; width: 100%; max-width: 420px;
+    display: flex; justify-content: space-around; z-index: 3;
+}
+.flag {
+    width: 40px; height: 50px;
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+}
+.segment-1 { background: #ff4757; }
+.segment-2 { background: #ffa502; }
+.segment-3 { background: #2ed573; }
+.segment-4 { background: #1e90ff; }
+.segment-5 { background: #ff6b81; }
+.segment-6 { background: #ea80fc; }
+
+/* --- TYPOGRAPHY ENGINE --- */
+.game-font-instruction {
+    color: #ffbe76;
+    font-size: 1.2rem;
+    text-shadow: 0 3px 0px #cf6a00;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.glowing-cursive-text {
+    font-family: 'Sacramento', cursive;
+    font-size: 4rem;
+    color: #fff;
+    text-shadow: 0 0 10px #ff6b81, 0 0 25px #ff4757;
+    text-align: center;
+}
+
+.hidden { display: none !important; }
+
+/* --- THE CAKE RE-BUILD (FIXES HALF-CAKE GLITCH) --- */
+.cake-wrapper {
+    cursor: pointer;
+    display: block; /* Switched to block layout container */
+    width: 100%;
+    max-width: 320px;
+    margin: auto auto;
+    text-align: center;
+    transform: scale(1.1);
+}
+
+.candle-row {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: -5px;
+    position: relative;
+    z-index: 10;
+}
+.candle {
+    width: 10px; height: 40px;
+    background: linear-gradient(to right, #fff, #ffda79);
+    border-radius: 4px;
+    position: relative;
+}
+.flame {
+    width: 14px; height: 22px;
+    background: #ff7f50;
+    border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
+    position: absolute; top: -18px; left: -2px;
+    box-shadow: 0 0 10px #ffaa00, 0 0 20px #ff4757;
+    animation: flicker 0.15s infinite alternate;
+}
+@keyframes flicker {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.15) rotate(3deg); }
+}
+
+/* Enforcing absolute center loading on all tiers */
+.giant-cake {
+    width: 100%;
+}
+
+.cake-tier {
+    position: relative;
+    border-radius: 14px 14px 4px 4px;
+    box-shadow: inset 0 -6px 0 rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.15);
+    margin: -6px auto 0 auto; /* Forces browser to center block horizontally */
+}
+
+.tier-4 { width: 120px; height: 45px; background: #ff7675; z-index: 4; }
+.tier-3 { width: 165px; height: 52px; background: #a55eea; z-index: 3; }
+.tier-2 { width: 210px; height: 60px; background: #45aaf2; z-index: 2; }
+.tier-1 { width: 255px; height: 68px; background: #fed330; z-index: 1; }
+
+.dripping-cream {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 15px;
+    background: #ffffff;
+    border-radius: 0 0 8px 8px;
+}
+
+.sprinkle { position: absolute; width: 4px; height: 10px; border-radius: 4px; background: #fff; }
+.s1 { top: 20px; left: 30px; background: #fed330; }
+.s2 { top: 22px; right: 30px; }
+.s3 { top: 25px; left: 45px; background: #ff7675; }
+.s4 { top: 25px; right: 45px; }
+.s5 { top: 30px; left: 60px; background: #a55eea; }
+.s6 { top: 30px; right: 60px; }
+
+.royal-plate {
+    width: 290px; height: 14px;
+    background: #f1f2f6;
+    border-bottom: 5px solid #ced6e0;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    margin: 0 auto;
+    z-index: 0;
+    position: relative;
+}
+
+/* --- NAVIGATION TRIGGER --- */
+.cute-bounce-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff4757, #ff6b81);
+    color: white;
+    padding: 14px 35px;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    box-shadow: 0 6px 0px #b33939, 0 10px 20px rgba(255, 71, 87, 0.4);
+    animation: bounceBtn 0.8s infinite alternate;
+}
+@keyframes bounceBtn {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-4px); }
+}
+
+/* --- LIVE PARTY PARTICLES --- */
+#party-container {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 99;
+}
+.balloon {
+    position: absolute;
+    bottom: -80px; width: 45px; height: 55px;
+    border-radius: 50%; opacity: 0.8;
+    animation: floatUp 4s linear forwards;
+}
+@keyframes floatUp {
+    0% { transform: translateY(0) translateX(0); }
+    100% { transform: translateY(-115vh) translateX(var(--drift)); }
+}
+.confetti {
+    position: absolute;
+    width: 8px; height: 8px;
+    animation: bangOut 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+@keyframes bangOut {
+    0% { bottom: 0; left: var(--start-x); transform: scale(1); }
+    100% { bottom: var(--dest-y); left: var(--dest-x); transform: scale(0.3) rotate(360deg); opacity: 0; }
+}

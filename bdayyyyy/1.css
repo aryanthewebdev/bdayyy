@@ -1,0 +1,162 @@
+/* Core Setup */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    background: radial-gradient(circle at top, #2e1a47 0%, #0f081d 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Floating Animated Stickers/Doodles */
+.doodle {
+    position: absolute;
+    font-size: 2.5rem;
+    opacity: 0.6;
+    animation: floatAround 6s ease-in-out infinite alternate;
+}
+.d1 { top: 10%; left: 10%; animation-delay: 0s; }
+.d2 { top: 15%; right: 12%; animation-delay: 1.5s; font-size: 3rem; }
+.d3 { bottom: 20%; left: 8%; animation-delay: 3s; }
+.d4 { bottom: 45%; right: 5%; animation-delay: 0.5s; }
+.d5 { top: 45%; left: 4%; animation-delay: 2.2s; }
+
+@keyframes floatAround {
+    0% { transform: translateY(0) rotate(0deg) scale(1); }
+    100% { transform: translateY(-20px) rotate(15deg) scale(1.1); }
+}
+
+/* Mobile Canvas Frame */
+.lock-screen-container {
+    width: 100%;
+    max-width: 410px;
+    height: 92vh;
+    max-height: 840px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 40px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 10;
+}
+
+/* Top Clock Zone */
+.header-zone {
+    text-align: center;
+    margin-top: 15px;
+}
+.time-display {
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: #fff;
+    text-shadow: 0 0 15px rgba(255,255,255,0.4);
+    letter-spacing: 2px;
+}
+.hint-text {
+    color: #bfa3ff;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+
+/* Center Lock Zone */
+.lock-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+.lock-icon {
+    font-size: 3.5rem;
+    cursor: pointer;
+    animation: pulseGlow 2s infinite alternate;
+    transition: transform 0.2s;
+}
+@keyframes pulseGlow {
+    0% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255,107,129,0.4)); }
+    100% { transform: scale(1.08); filter: drop-shadow(0 0 20px rgba(255,107,129,0.8)); }
+}
+
+/* Shake animation for wrong pins */
+.shake {
+    animation: shakeAnim 0.4s ease-in-out !important;
+}
+@keyframes shakeAnim {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-10px); }
+    40%, 80% { transform: translateX(10px); }
+}
+
+/* PIN Indicator Dots */
+.pin-dots {
+    display: flex;
+    gap: 15px;
+}
+.dot {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+.dot.active {
+    background-color: #ff6b81;
+    border-color: #ff6b81;
+    box-shadow: 0 0 12px #ff6b81;
+}
+
+/* Bottom Keypad Zone */
+.keypad-zone {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+.keypad-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.key {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.1s, transform 0.1s;
+    -webkit-tap-highlight-color: transparent;
+}
+.key:active {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0.9);
+}
+.clear-btn, .blank-btn {
+    background: transparent;
+    font-size: 1.2rem;
+}
+.clear-btn:active {
+    background: transparent;
+}

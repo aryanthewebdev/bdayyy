@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlock Your Surprise 🔐</title>
+    <link rel="stylesheet" href="1.css">
+</head>
+<body>
+
+    <div class="doodle d1">🎈</div>
+    <div class="doodle d2">✨</div>
+    <div class="doodle d3">🍰</div>
+    <div class="doodle d4">🎨</div>
+    <div class="doodle d5">🥳</div>
+
+    <div class="lock-screen-container">
+        
+        <div class="header-zone">
+            <div class="time-display" id="clock">00:00</div>
+            <p class="hint-text">Enter the magic pin to unlock</p>
+        </div>
+
+        <div class="lock-zone">
+            <div class="lock-icon" id="lockWrapper">
+                <span class="shackle"></span>
+                <span class="body">🔒</span>
+            </div>
+            
+            <div class="pin-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <div class="keypad-zone">
+            <div class="keypad-row">
+                <button class="key" onclick="pressKey(1)">1</button>
+                <button class="key" onclick="pressKey(2)">2</button>
+                <button class="key" onclick="pressKey(3)">3</button>
+            </div>
+            <div class="keypad-row">
+                <button class="key" onclick="pressKey(4)">4</button>
+                <button class="key" onclick="pressKey(5)">5</button>
+                <button class="key" onclick="pressKey(6)">6</button>
+            </div>
+            <div class="keypad-row">
+                <button class="key" onclick="pressKey(7)">7</button>
+                <button class="key" onclick="pressKey(8)">8</button>
+                <button class="key" onclick="pressKey(9)">9</button>
+            </div>
+            <div class="keypad-row">
+                <button class="key clear-btn" onclick="clearPin()">⌫</button>
+                <button class="key" onclick="pressKey(0)">0</button>
+                <button class="key blank-btn"></button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="1.js"></script>
+</body>
+</html>
